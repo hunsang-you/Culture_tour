@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { fetchFestivalData } from "@/api/festival";
 import KaKaoMaps from "@/components/KaKaoMaps";
 import { Festival } from "@/types/data";
 
@@ -9,12 +8,18 @@ export default function Home() {
   const [festivals, setFestivals] = useState<Festival[]>([]);
   const [searchInput, setSearchInput] = useState("");
 
-  // ✅ 공공데이터 API 호출
+  // API Route 호출
   useEffect(() => {
     async function loadFestivals() {
-      const data = await fetchFestivalData(1, 20);
-      if (data?.response?.body?.items) {
-        setFestivals(data.response.body.items);
+      try {
+        const res = await fetch(`/api/festival?pageNo=1&numOfRows=20`);
+        console.log(res);
+        const data = await res.json();
+        if (data?.response?.body?.items) {
+          setFestivals(data.response.body.items);
+        }
+      } catch (err) {
+        console.error("API 호출 실패:", err);
       }
     }
     loadFestivals();
@@ -23,15 +28,15 @@ export default function Home() {
   return (
     <div className="flex flex-col h-screen">
       {/* 상단 검색 영역 */}
-      <div className="p-4 bg-gray-100 flex gap-2">
+      <div className="flex gap-2 p-4 bg-gray-100">
         <input
           type="text"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
           placeholder="지역명 입력"
-          className="flex-1 border p-2 rounded"
+          className="flex-1 p-2 border rounded"
         />
-        <button className="px-4 py-2 bg-blue-500 text-white rounded">
+        <button className="px-4 py-2 text-white bg-blue-500 rounded">
           검색
         </button>
       </div>
@@ -66,7 +71,7 @@ export default function Home() {
       </div>
 
       {/* 하단 축제 리스트 */}
-      <div className="h-48 overflow-y-auto border-t bg-gray-50 p-2">
+      <div className="h-48 p-2 overflow-y-auto border-t bg-gray-50">
         {festivals.length > 0 ? (
           festivals.map((fstvl, idx) => (
             <div
