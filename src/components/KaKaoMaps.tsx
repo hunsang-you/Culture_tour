@@ -38,7 +38,6 @@ export default function KakaoMap() {
 
   if (loading) return <div>Loading...</div>;
   if (error) {
-    console.log(KAKAO_MAP_KEY, "KEY");
     console.error("Kakao Map load error:", error);
     return <div>Error loading Kakao Map</div>;
   }
