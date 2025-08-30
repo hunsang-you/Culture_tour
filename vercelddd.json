@@ -1,8 +1,0 @@
-{
-  "rewrites": [
-    {
-      "source": "/api/festival",
-      "destination": "https://api.data.go.kr/openapi/tn_pubr_public_cltur_fstvl_api"
-    }
-  ]
-}
