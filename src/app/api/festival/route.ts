@@ -7,8 +7,7 @@ export async function GET(req: Request) {
   const numOfRows = searchParams.get("numOfRows") || "10";
   const SERVICE_KEY = process.env.FESTIVAL_SERVICE_KEY!;
 
-  const API_URL =
-    "https://api.data.go.kr/openapi/tn_pubr_public_cltur_fstvl_api";
+  const API_URL = process.env.FESTIVAL_API_URL!;
 
   const params = {
     ServiceKey: SERVICE_KEY,
@@ -16,7 +15,6 @@ export async function GET(req: Request) {
     numOfRows,
     type: "json",
   };
-
   try {
     const response = await axios.get(API_URL, { params });
 
