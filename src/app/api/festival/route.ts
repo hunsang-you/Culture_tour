@@ -7,9 +7,7 @@ export async function GET(req: Request) {
   const SERVICE_KEY = process.env.FESTIVAL_SERVICE_KEY!;
 
   const API_URL =
-    process.env.NODE_ENV === "development"
-      ? process.env.FESTIVAL_API_URL!
-      : "http://api.data.go.kr/openapi/tn_pubr_public_cltur_fstvl_api";
+    "http://api.data.go.kr/openapi/tn_pubr_public_cltur_fstvl_api";
 
   const url = new URL(API_URL);
   url.searchParams.append("ServiceKey", SERVICE_KEY);
