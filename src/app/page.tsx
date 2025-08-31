@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import KaKaoMaps from "@/components/KaKaoMaps";
 import { Festival } from "@/types/data";
+import FestivalList from "@/components/FestivalList";
+import Button from "@/components/UI/Button";
 
 export default function Home() {
   const [festivals, setFestivals] = useState<Festival[]>([]);
@@ -26,7 +28,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen max-w-4xl min-w-[20rem] mx-auto">
       {/* 상단 검색 영역 */}
       <div className="flex gap-2 p-4 bg-gray-100">
         <input
@@ -55,40 +57,21 @@ export default function Home() {
           "부산",
           "제주",
         ].map((region) => (
-          <button
+          <Button
             key={region}
+            label={region}
             onClick={() => setSearchInput(region)}
-            className="px-3 py-1 bg-gray-200 rounded"
-          >
-            {region}
-          </button>
+          />
         ))}
       </div>
 
+      {/* 하단 축제 리스트 */}
+      <div className="py-8">
+        <FestivalList festivals={festivals} />
+      </div>
       {/* 지도 */}
       <div className="w-full h-[360px] border-2 border-black">
         <KaKaoMaps />
-      </div>
-
-      {/* 하단 축제 리스트 */}
-      <div className="h-48 p-2 overflow-y-auto border-t bg-gray-50">
-        {festivals.length > 0 ? (
-          festivals.map((fstvl, idx) => (
-            <div
-              key={idx}
-              className="p-2 border-b cursor-pointer hover:bg-gray-100"
-            >
-              <div className="font-bold">{fstvl.fstvlNm}</div>
-              <div className="text-sm text-gray-600">
-                {fstvl.opar} | {fstvl.fstvlStartDate} ~ {fstvl.fstvlEndDate}
-              </div>
-            </div>
-          ))
-        ) : (
-          <div className="text-center text-gray-500">
-            축제 데이터를 불러오는 중...
-          </div>
-        )}
       </div>
     </div>
   );
