@@ -28,7 +28,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col h-screen max-w-4xl min-w-[20rem] mx-auto">
+    <div className="flex flex-col max-w-4xl min-w-[20rem] mx-auto">
       {/* 상단 검색 영역 */}
       <div className="flex gap-2 p-4 bg-gray-100">
         <input
@@ -38,9 +38,10 @@ export default function Home() {
           placeholder="지역명 입력"
           className="flex-1 p-2 border rounded"
         />
-        <button className="px-4 py-2 text-white bg-blue-500 rounded">
-          검색
-        </button>
+        <Button
+          label="검색"
+          className="px-4 py-2 font-bold text-gray-500 bg-white border-gray-200 border-1 rounded-xl hover:bg-blue-400"
+        />
       </div>
 
       {/* 카테고리 버튼 */}
@@ -61,6 +62,7 @@ export default function Home() {
             key={region}
             label={region}
             onClick={() => setSearchInput(region)}
+            className="bg-orange-100 hover:bg-blue-400"
           />
         ))}
       </div>

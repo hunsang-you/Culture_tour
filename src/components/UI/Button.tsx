@@ -4,7 +4,9 @@ export default function Button({ label, onClick, className }: ButtonProps) {
   return (
     <button
       onClick={onClick}
-      className={`px-3 py-1 bg-gray-200 rounded ${className ?? ""}`}
+      className={`flex-shrink-0 px-4 py-2 bg-gray-200 rounded font-medium  ${
+        className ?? ""
+      }`}
     >
       {label}
     </button>

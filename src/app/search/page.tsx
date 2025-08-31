@@ -1,7 +1,7 @@
-export default function page() {
+export default function Search() {
   return (
     <>
-      <h1>page Component</h1>
+      <h1>Search Component</h1>
     </>
   );
 }
