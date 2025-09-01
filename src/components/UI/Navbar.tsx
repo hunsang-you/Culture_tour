@@ -25,9 +25,6 @@ export default function Navbar() {
           <div className="flex-shrink-0 px-2 bg-yellow-300 whitespace-nowrap">
             <Link href="/auth/Login">Login</Link>
           </div>
-          <div className="flex-shrink-0 px-2 bg-yellow-300 whitespace-nowrap">
-            <Link href="/auth/Signup">회원가입</Link>
-          </div>
         </div>
       </div>
 
@@ -47,13 +44,46 @@ export default function Navbar() {
             <Link href="/auth/Login" className="px-2 py-2 bg-yellow-300">
               Login
             </Link>
-            <Link href="/auth/Signup" className="px-2 py-2 bg-yellow-300">
-              회원가입
-            </Link>{" "}
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2">
+              <svg
+                className="w-6 h-6 hover:scale-105"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16m-7 6h7"
+                ></path>
+              </svg>
+            </button>
           </div>
         )}
+        <div>
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="p-2 hover:scale-105"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16m-7 6h7"
+              ></path>
+            </svg>
+          </button>
+        </div>
       </div>
-      {isMenuOpen && <div className="flex flex-col gap-2 mt-4"></div>}
     </>
   );
 }
