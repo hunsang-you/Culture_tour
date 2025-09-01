@@ -6,7 +6,11 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "supabase:init": "supabase init",
+    "supabase:start": "supabase start",
+    "supabase:deploy": "supabase functions deploy",
+    "supabase:login": "supabase login"
   },
   "dependencies": {
     "@supabase/ssr": "^0.7.0",

@@ -1,3 +1,15 @@
 {
-  "imports": {}
+  "imports": {
+    "https://esm.sh/": "https://esm.sh/",
+    "std/": "https://deno.land/std@0.177.0/"
+  },
+  "tasks": {
+    "test": "deno test --allow-net --allow-env"
+  },
+  "compilerOptions": {
+    "lib": ["deno.ns", "deno.unstable"]
+  },
+  "env": {
+    "FESTIVAL_SERVICE_KEY": "env(FESTIVAL_SERVICE_KEY)"
+  }
 }

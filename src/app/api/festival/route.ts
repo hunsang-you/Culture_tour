@@ -14,7 +14,7 @@ export async function GET(req: Request) {
   url.searchParams.append("pageNo", pageNo);
   url.searchParams.append("numOfRows", numOfRows);
   url.searchParams.append("type", "json");
-
+  console.log(url)
   try {
     const response = await fetch(url.toString());
 
