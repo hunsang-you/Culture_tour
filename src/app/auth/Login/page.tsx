@@ -8,16 +8,6 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // 환경에 따라 동적으로 콜백 URL을 설정합니다.
-  const getRedirectUrl = () => {
-    // NODE_ENV가 'development'인 경우 로컬 환경 URL을 사용
-    if (process.env.NODE_ENV === "development") {
-      return "http://localhost:3000/auth/callback";
-    }
-    // 그 외 (프로덕션) 환경인 경우 배포된 Vercel URL을 사용
-    return "https://culture-tour.vercel.app/auth/callback";
-  };
-
   // 이메일 회원가입
   const handleSignup = async () => {
     const { error } = await supabase.auth.signUp({
@@ -42,9 +32,7 @@ export default function Login() {
   const handleGoogleLogin = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: {
-        redirectTo: getRedirectUrl(),
-      },
+      // redirectTo 옵션 제거 → Supabase 설정에 등록된 URL을 자동 사용
     });
     if (error) alert(`구글 로그인 실패: ${error.message}`);
   };
@@ -53,12 +41,11 @@ export default function Login() {
   const handleKakaoLogin = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "kakao",
-      options: {
-        redirectTo: getRedirectUrl(),
-      },
+      // redirectTo 옵션 제거 → Supabase 설정에 등록된 URL을 자동 사용
     });
     if (error) alert(`카카오 로그인 실패: ${error.message}`);
   };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-4">
       <h1 className="text-2xl font-bold">Login</h1>
