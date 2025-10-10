@@ -1,9 +1,10 @@
 "use client";
 
+import { Festival } from "@/types/data";
 import { useEffect, useState } from "react";
 import { Map, MapMarker, useKakaoLoader } from "react-kakao-maps-sdk";
 
-export default function KakaoMap() {
+export default function KakaoMap({ festivals }: { festivals: Festival[] }) {
   const KAKAO_MAP_KEY = process.env.NEXT_PUBLIC_KAKAO_MAP_KEY;
   const [loading, error] = useKakaoLoader({
     appkey: KAKAO_MAP_KEY!,
@@ -26,12 +27,12 @@ export default function KakaoMap() {
         (err) => {
           console.error("Geolocation error:", err);
           // 실패 시 기본 위치 지정
-          setUserLocation({ lat: 33.5563, lng: 126.79581 });
+          setUserLocation({ lat: 37.5642135, lng: 127.0016985 });
         }
       );
     } else {
       // 브라우저가 Geolocation을 지원하지 않을 경우
-      setUserLocation({ lat: 33.5563, lng: 126.79581 });
+      setUserLocation({ lat: 37.5642135, lng: 127.0016985 });
     }
   }, []);
 

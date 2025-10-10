@@ -1,34 +1,23 @@
+// app/api/festival/route.ts
 import { NextResponse } from "next/server";
+import { createClient } from "@supabase/supabase-js";
 
-export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
-  const pageNo = searchParams.get("pageNo") || "1";
-  const numOfRows = searchParams.get("numOfRows") || "10";
-  const SERVICE_KEY = process.env.FESTIVAL_SERVICE_KEY!;
+// Supabase 클라이언트 생성
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
-  const API_URL =
-    "http://api.data.go.kr/openapi/tn_pubr_public_cltur_fstvl_api";
-
-  const url = new URL(API_URL);
-  url.searchParams.append("ServiceKey", SERVICE_KEY);
-  url.searchParams.append("pageNo", pageNo);
-  url.searchParams.append("numOfRows", numOfRows);
-  url.searchParams.append("type", "json");
-
+export async function GET() {
   try {
-    const response = await fetch(url.toString());
+    // Supabase에서 festival 테이블 조회 (페이지네이션 적용)
+    const { data, error } = await supabase.from("festivals").select("*");
 
-    // 에러 상태 코드 확인
-    if (!response.ok) {
-      throw new Error(
-        `API 호출 실패: ${response.status} ${response.statusText}`
-      );
-    }
-
-    const data = await response.json();
-    return NextResponse.json(data);
+    if (error) throw error;
+    console.log(data);
+    return NextResponse.json({ data });
   } catch (err) {
-    console.error("API 호출 에러:", err);
-    return NextResponse.json({ error: "API 호출 실패" }, { status: 500 });
+    console.error("Supabase 호출 에러:", err);
+    return NextResponse.json({ error: "DB 호출 실패" }, { status: 500 });
   }
 }
