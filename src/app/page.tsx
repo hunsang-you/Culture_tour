@@ -158,7 +158,7 @@ export default function Home() {
 
       {/* 지도 */}
       <div className="w-full h-[360px] border-2 border-black">
-        <KaKaoMap festivals={festivals} />
+        <KaKaoMap festivals={festivals} userLocation={userLocation} />
       </div>
 
       {/* 리스트: 근처 축제만 표시 */}
